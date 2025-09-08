@@ -1,19 +1,24 @@
 USE [BusinessLicenceApplications]
 GO
-/****** Object:  StoredProcedure [dbo].[sp_submitApplication]    Script Date: 2025-09-08 1:54:42 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_submitApplication]    Script Date: 9/8/2025 10:07:19 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-
+ 
 /**
 Name   : dbo.sp_submitApplication
+ 
+Date   : Aug 27, 2025
+Author : Logan Zetaruk
+Purpose: Add BusYears
+ 
 Date   : June 20, 2025
 Author : Ted Corpus
 Purpose: add Business licence submission to database
 Require: dbo.f_GetSessionID() to get the SubmissionID (a random number)
 **/
-ALTER      PROC [dbo].[sp_submitApplication](
+ALTER       PROC [dbo].[sp_submitApplication](
    @ApplicationSessionID    varchar(100)
   ,@BusName                 varchar(255)
   ,@BusAddress              varchar(255)
@@ -26,16 +31,12 @@ ALTER      PROC [dbo].[sp_submitApplication](
   ,@IncorpNumber            varchar(50)   NULL
   ,@TQNumber                varchar(50)   NULL
   ,@BusDescription          varchar(500)  NULL
-  ,@IsCommLicence           bit           NULL
-  ,@IsHomeOccLicence        bit           NULL
-  ,@IsDayCareLicence        bit           NULL
-  ,@IsNonResLicence         bit           NULL
+  ,@BusType                 varchar(100)  NULL
   ,@IsIntermunicipal        bit           NULL
-  ,@IsCommUnder5K           bit           NULL
-  ,@IsPrimaryRes            bit           NULL
   ,@IsSecondarySuite        bit           NULL
   ,@IsClientsOnSite         bit           NULL
   ,@NumChildren             smallint      NULL
+  ,@DayCareLocation         varchar(100)  NULL
   ,@BusArea                 float         NULL
   ,@EmpCount                smallint      NULL
   ,@IsRenovating            bit           NULL
@@ -71,23 +72,19 @@ BEGIN
   ,BusAddress           
   ,BusPhone             
   ,BusEmail             
-  ,Website              
-  ,BusYears             
+  ,Website   
+  ,BusYears
   ,BusMailingAddress    
   ,CorporateName        
   ,IncorpNumber
   ,TQNumber         
   ,BusDescription       
-  ,IsCommLicence        
-  ,IsHomeOccLicence     
-  ,IsDayCareLicence     
-  ,IsNonResLicence      
+  ,BusType
   ,IsIntermunicipal     
-  ,IsCommUnder5K        
-  ,IsPrimaryRes         
   ,IsSecondarySuite     
   ,IsClientsOnSite      
-  ,NumChildren          
+  ,NumChildren   
+  ,DayCareLocation         
   ,BusArea              
   ,EmpCount             
   ,IsRenovating         
@@ -115,23 +112,19 @@ BEGIN
   ,@BusAddress           
   ,@BusPhone             
   ,@BusEmail             
-  ,@Website              
-  ,@BusYears             
+  ,@Website    
+  ,@BusYears
   ,@BusMailingAddress    
   ,@CorporateName        
   ,@IncorpNumber    
   ,@TQNumber     
   ,@BusDescription       
-  ,@IsCommLicence        
-  ,@IsHomeOccLicence     
-  ,@IsDayCareLicence     
-  ,@IsNonResLicence      
+  ,@BusType
   ,@IsIntermunicipal     
-  ,@IsCommUnder5K        
-  ,@IsPrimaryRes         
   ,@IsSecondarySuite     
   ,@IsClientsOnSite      
-  ,@NumChildren          
+  ,@NumChildren 
+  ,@DayCareLocation         
   ,@BusArea              
   ,@EmpCount             
   ,@IsRenovating         
